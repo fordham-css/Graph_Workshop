@@ -438,7 +438,55 @@ vector<int> gardenNoAdj(int N, vector<vector<int>>& paths) {
             
         \end{column}
     \end{columns}
-    
+\end{frame}
+\begin{frame}
+    \frametitle{Solution Problem 2}
 
+    There about a million ways you could code this, so I'll just show
+    the theory behind the solution.
+    \\~\\
+    \begin{center}
+        \begin{tikzpicture}[draw = white, color = white]
+            \tikzset{vertex/.style = {shape=circle,draw,minimum size=1.5em}}
+            \tikzset{edge/.style = {> = latex'}}
+
+            \node[vertex] (0) at (0, 0) {};
+    
+            \node[vertex, draw=red, color=red] (1) at (2, -2) {};
+            \node[vertex, draw=red, color=red] (2) at (2, 0) {};
+            \node[vertex, draw=red, color=red] (3) at (2, 2) {};
+    
+            \node[vertex] (4) at (4, -2) {};
+            \node[vertex] (5) at (4, -1) {};
+            \node[vertex] (6) at (4, 0) {};
+            \node[vertex] (7) at (4, 1) {};
+            \node[vertex] (8) at (4, 2) {};
+    
+            \node[vertex, draw=red, color=red] (9) at (6, -1) {};
+            \node[vertex, draw=red, color=red] (10) at (6, 1) {};
+
+            \draw[edge] (0) to (1);
+            \draw[edge] (0) to (2);
+            \draw[edge] (0) to (3);
+
+            \draw[edge] (1) to (6);
+            \draw[edge] (1) to (4);
+            \draw[edge] (1) to (8);
+
+            \draw[edge] (2) to (7);
+            \draw[edge] (2) to (4);
+            \draw[edge] (2) to (5);
+
+            \draw[edge] (3) to (5);
+
+            \draw[edge] (5) to (10);
+            \draw[edge] (4) to (10);
+
+            \draw[edge] (7) to (9);
+            \draw[edge] (8) to (9);
+        \end{tikzpicture}
+    \end{center}
+    You create a list that stores the ``color'' of each node: red, black, or uncolored.
+   
 \end{frame}
 \end{document}
