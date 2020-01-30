@@ -2,8 +2,6 @@
 \usepackage{hyperref}
 \usepackage{listings}
 \usepackage{tkz-berge}
-\usetikzlibrary{positioning}
-\usetikzlibrary{quotes}
 \setbeamertemplate{caption}[numbered]
 
 % \usepackage{fontspec}
@@ -165,8 +163,8 @@
             \begin{minipage}[c]{0.4\textwidth}
                 \centering
                 $\begin{pmatrix}
-                    1 & 1 & 1 & 0 \\
-                    0 & 0 & 1 & 0 \\
+                    1 & 1 & 0 & 1 \\
+                    0 & 1 & 0 & 0 \\
                     0 & 0 & 0 & 0 \\
                     1 & 0 & 0 & 0
                 \end{pmatrix}$
@@ -306,7 +304,7 @@ vector<vector<int>> graph = {
             \item get\_edge\_value(\dots): value type\only<2->\footnote[frame]{Argument is either edge key or the two vertices it connects, depending on representation.}
         \end{itemize}
         \pause
-        \item Modify Operations
+        \item Modify Operations\only<3->\footnote[frame]{We won't be modifying already constructed graphs in this workshop.}
         \begin{itemize}
             \item set\_vertex\_value(x, v): void
             \item set\_edge\_value(\dots, v): void
@@ -349,16 +347,6 @@ vector<vector<int>> graph = {
         identify any path between two nodes.
         \item Path is not guaranteed to be optimal by any metric.
     \end{itemize}
-    \pause
-    \begin{enumerate}
-        \item Pick an arbitrary node.
-        \item Perform whatever you need to do, returning now
-              if end condition is met.
-        \item For each node to which this node is connected,
-              recurse with that node as the starting node.
-        \item Once function has been run on all child nodes,
-              return result back up the stack.
-    \end{enumerate}
     
 
 \end{frame}
@@ -522,52 +510,26 @@ vector<int> gardenNoAdj(int N, vector<vector<int>>& paths) {
     Given a list of challenges,
     consisting of pairs of symbols,
     return the ratio between each of them.
-    \\~\\
-    \noindent\begin{minipage}{0.45\textwidth}
-        \begin{lstlisting}
-struct equation {
-    char numerator;
-    char denominator;
-    double ratio;
-}
-        \end{lstlisting} 
-    \end{minipage}\hfill
-    \begin{minipage}{0.45\textwidth}
-        \(\frac{a}{b} = 3\)\\~\\
-        \(\frac{b}{c} = 5\)\\~\\
-        \(\frac{a}{c} = ?\)\\~\\
-        \(\frac{c}{b} = ?\)
-    \end{minipage}
-\end{frame}
-\begin{frame}
-    \frametitle{Major Hint for Problem 3}
-    \centering
-    \begin{tikzpicture}
-        \tikzset{vertex/.style = {shape=circle,draw,minimum size=1.5em}}
-        \tikzset{edge/.style = {->,> = latex'}}
+        \noindent\begin{minipage}{0.45\textwidth}
+            \begin{lstlisting}[frame=tlrb]
+                struct equation {
+                    char numerator;
+                    char denominator;
+                    double ratio;
+                }
+            \end{lstlisting} 
+        \end{minipage}\hfill
+        \begin{minipage}{0.45\textwidth}
+            something
+            % \begin{equation}
+            %     % \frac{a}{b} = 5
+            %     % \frac{b}{c} = 3
 
-        \node[vertex] (a) at (0,0) {a};
-        \node[vertex, below left = 5cm of a] (b) {b};
-        \node[vertex, below right = 5cm of a] (c) {c};
+            %     % \frac{a}{c} = \?
+            %     % \frac{c}{b} = \?
+            % \end{equation}
+        \end{minipage}
 
-        \draw[edge] (a) to ["$3$", bend right] (b);
-        \draw[edge] (b) to ["$5$", bend right] (c);
-        \pause
-        \draw[edge] (b) to ["$\frac{1}{3}$", bend right] (a);
-        \draw[edge] (c) to ["$\frac{1}{5}$", bend right] (b);
-        \pause
-        \draw[edge] (a) to ["$15$", bend right] (c);
-        \draw[edge] (c) to ["$\frac{1}{15}$", bend right] (a);
-    \end{tikzpicture}
-\end{frame}
-\begin{frame}
-    \frametitle{Solution Problem 3}
-    \begin{enumerate}
-        \item Add inverse of every equation to graph to avoid duplicate code later on.
-        \item Iterate over every node that has challenge numerator as its numerator.
-        \item If any one of them has challenge denominator as its denominator return solution.
-        \item Else, recurse to 1 on every node, making new challenge numerator current node denominator.
-        \item When a match is found, multiply every node's ratio together back up stack.
-    \end{enumerate}
+
 \end{frame}
 \end{document}
